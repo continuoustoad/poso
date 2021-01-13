@@ -1,13 +1,17 @@
 type Operator+[x of Int];
-+ of Int to Operator+ = {
-    Int to Operator+ @ "x" [] Operator+
++ of Int to Operator+ = { Int to Operator+
+    @ "x" [] Operator+
 }
 
+include :Stdlib/Math/Add
+
 from Operator+ to Int = { Operator+ to Int
-    @ 1 [0=x] Stdlib/Math/Add }
+    x of Int = $ :x
+    @ 1 [0 of Int = x] Stdlib/Math/Add
+}
 
 x of Int = 2;
 y of Int = 3;
 math of Int to Int = { Int to Int + x + y };
 
-main of Not to Not = { Not to Not input math print }
+gets Int math Str puts

@@ -167,6 +167,7 @@ So instead of `garbage_collector`, use `gc`, but not `g`.
   * `method_name()`
 * Variables
   * `int a = z + 2, b = 0;`.
-  * Group variables by meaning. So `size_t a_len, b_len` is
+  * Group variables by meaning.
+    So `size_t a_len, b_len` is
     good, but `int gc_pool_size, my_grandmothers_age` isn't
     very good.
