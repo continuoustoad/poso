@@ -114,3 +114,17 @@ math of Int to Int = { Int to Int + x + y }
 gets Int math Str puts
 
 ```
+
+## Currently Implemented / TODO
+### Compiler (For now, Temporary Evaluator)
+- [x] Lexer (Both)
+- [ ] Parser (Both)
+- [ ] Type-checker (Compiled)
+- [ ] Temporary Evaluator
+- [ ] Optimiser? (Compiled)
+
+### VM
+- [ ] Bytecode Spec
+- [ ] Bytecode Reader
+- [ ] Bytecode Evaluator
+- [ ] AOT/JIT? (very improbable)

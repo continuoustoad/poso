@@ -2,12 +2,12 @@
 #include <string>
 #include <iostream>
 #include <sstream>
-#include "lexer.hpp"
-#include "ast.hpp"
+#include <lexer.hpp>
+#include <ast.hpp>
 #define RET_NODE(t, v) {  }
 
 namespace poso
-{
+{    
     enum struct error_type_t
     {
         expected,
@@ -16,9 +16,16 @@ namespace poso
         other,
     };
 
+    lexer::token_stream_t null_token_stream;
+
+    class eval; // for the friend
     class parser
     {
-        lexer::token_stream_t &in;
+        friend lexer::lex &operator>>(lexer::lex&, parser&);
+        friend parser &operator>>(parser&, eval&);
+
+        lexer::token_stream_t &in = null_token_stream;
+        ast::node_t *root;
 
         void error(error_type_t type, const std::string &msg, bool fatal = false)
         {
@@ -26,9 +33,9 @@ namespace poso
             std::cerr << "Error: ";
             switch(type)
             {
-                case error_type_t::expected: std::cerr << "Expected "; break;
+                case   error_type_t::expected: std::cerr << "Expected "; break;
                 case error_type_t::unexpected: std::cerr << "Unxpected "; break;
-                case error_type_t::assertion: std::cerr << "Assertion failed: "; break;
+                case  error_type_t::assertion: std::cerr << "Assertion failed: "; break;
                 default: break;
             }
             std::cerr << msg << std::endl;
@@ -74,7 +81,17 @@ namespace poso
             else error(error_type_t::expected, "an atom");
             return new ast::var_node_t("<error>");
         }
-    public:
-        parser(lexer::token_stream_t &in) : in(in) {}
+
+        ast::node_t *parse()
+        {
+            return nullptr;
+        }
     };
+
+    lexer::lex &operator>>(lexer::lex &in, parser &p)
+    {
+        p.in = in.token_stream;
+        p.root = p.parse();
+        return in;
+    }
 }

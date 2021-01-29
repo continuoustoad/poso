@@ -10,8 +10,8 @@ from Operator+ to Int = { Operator+ to Int
     @ 1 [0 of Int = x] Stdlib/Math/Add
 }
 
-x of Int = 2;
-y of Int = 3;
-math of Int to Int = { Int to Int + x + y };
+x of Int = 2
+y of Int = 3
+math of Int to Int = { Int to Int + x + y }
 
 gets Int math Str puts

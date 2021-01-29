@@ -3,6 +3,7 @@
 #include <string>
 #include <forward_list>
 #include <cstdlib>
+#include <stack>
 
 namespace poso::lang
 {
@@ -24,6 +25,8 @@ namespace poso::lang
             throw std::runtime_error("No such variable: " + name);
         }
     };
+
+    using scope_stack_t = std::stack<scope_t>;
 
     struct number_object_t : public object_t
     { double number; };
@@ -119,6 +122,13 @@ namespace poso::lang
         auto x = new string_object_t;
         x->string = const_cast<char*>(s.data());
         x->length = s.length();
+        gc::global_gc << x;
+        return x;
+    }
+
+    object_t *make_nil()
+    {
+        auto x = new object_t;
         gc::global_gc << x;
         return x;
     }
