@@ -36,7 +36,7 @@ type Operator+[:x of Int]
 # Creates (overloads in this case)
 # a variable + of type Int to Operator+
 # or a function from Int to Operator+
-#  lambda argument  ____
+#          lambda  ____
 #                       \
 #                       v
 + of Int to Operator+ = { Int to Operator+
